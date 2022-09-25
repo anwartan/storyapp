@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Aplikasi Story</string>
+    <string name="action_settings">Settings</string>
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Selanjutnya</string>
+    <string name="previous">Sebelumnya</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="the_input_is_not_valid">Input tidak valid</string>
+    <string name="password_not_greater_6">Panjang password wajib lebih besar dari 6 digit</string>
+    <string name="email_address">Alamat email</string>
+    <string name="password">Password</string>
+    <string name="fragment_login">Masuk</string>
+    <string name="name">Nama</string>
+    <string name="register">Register</string>
+    <string name="submit">Kirim</string>
+    <string name="logout">Keluar</string>
+    <string name="poster">poster</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="add_story">Tambah Story</string>
+    <string name="login_page">Login Page</string>
+    <string name="description">Deskripsi</string>
+    <string name="lat">Lat</string>
+    <string name="lon">Lon</string>
+    <string name="preview_image_view">Tampilan Gambar</string>
+    <string name="ambil_foto">Ambil Foto Terlebih dahulu</string>
+    <string name="permission">Tidak mendapatkan permission.</string>
+    <string name="gagal_ambil_gambar">Gagal mengambil gambar.</string>
+    <string name="gagal_muncul_kamera">Gagal memunculkan kamera.</string>
+    <string name="input_tidak_boleh_kosong">Inputan tidak boleh kosong</string>
+    <string name="email_tidak_valid">Email tidak valid</string>
+    <string name="panjang_wajib_6">Panjang password wajib lebih besar dari 6 digit</string>
+    <string name="take_photo">Ambil Gambar</string>
+    <string name="login">Masuk</string>
+    <string name="detail">Detail</string>
+
+</resources>

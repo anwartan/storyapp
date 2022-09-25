@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".DetailFragment">
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_width="0dp"
+        android:layout_height="500dp"
+        android:transitionName="image_big"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/preview_image_view" />
+
+    <TextView
+        android:textStyle="bold"
+        android:id="@+id/tv_title"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:transitionName="title"
+        android:text="@string/app_name"
+        android:layout_margin="10dp"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/ivImage"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:id="@+id/tv_description"
+        android:text="@string/app_name"
+        android:transitionName="description"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        android:layout_height="wrap_content" />
+
+</androidx.constraintlayout.widget.ConstraintLayout >
