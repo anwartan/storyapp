@@ -59,11 +59,8 @@ class AddStoryFragment : BaseFragment() {
         binding.previewImageView.setOnClickListener { startCameraX() }
 
         binding.btnAddStory.setOnClickListener {
-            if(binding.etDescription.isValid() && binding.etLat.isValid() && binding.etLon.isValid()){
+            if(binding.etDescription.isValid()) {
                 val description = binding.etDescription.text.toString()
-                val etLat = binding.etLat.text.toString()
-                val etLon = binding.etLon.text.toString()
-
                 when (imageFile) {
                     null -> {
                         Toast.makeText(context, getString(R.string.ambil_foto), Toast.LENGTH_SHORT).show()
@@ -71,8 +68,8 @@ class AddStoryFragment : BaseFragment() {
                     else -> {
                         addStoryViewModel.addStory(
                             description,
-                            etLat.toFloat(),
-                            etLon.toFloat(),
+                            null,
+                            null,
                             imageFile!!
                         )
                     }

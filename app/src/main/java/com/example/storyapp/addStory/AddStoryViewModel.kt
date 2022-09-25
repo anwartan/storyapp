@@ -24,13 +24,13 @@ class AddStoryViewModel : ViewModel() {
     val isLoading:LiveData<Boolean> = _isLoading
     private val _message = MutableLiveData<Event<String>>()
     val message: LiveData<Event<String>> = _message
-    fun addStory(description: String, lat: Float, lon: Float, image: File) {
+    fun addStory(description: String, lat: Float?, lon: Float?, image: File) {
         _isLoading.value=true
         val requestImageFile = image.asRequestBody("image/jpeg".toMediaTypeOrNull())
         val multiPart = MultipartBody.Part.createFormData("photo", image.name, requestImageFile)
         val descriptionRequest = description.toRequestBody("text/plain".toMediaType())
-        val latRequest = lat.toString().toRequestBody("text/plain".toMediaType())
-        val lonRequest = lon.toString().toRequestBody("text/plain".toMediaType())
+        val latRequest = lat?.toString()?.toRequestBody("text/plain".toMediaType())
+        val lonRequest = lon?.toString()?.toRequestBody("text/plain".toMediaType())
 
         val client = ApiConfig.getApiService()
             .addStory(descriptionRequest, multiPart, latRequest, lonRequest)
@@ -41,6 +41,7 @@ class AddStoryViewModel : ViewModel() {
                 _isLoading.value=false
                 if (response.isSuccessful && responseBody != null) {
                     _added.value = responseBody.error != true
+                }else{
                     val message = response.errorBody()
                         ?.let { ResponseMapper.mapErrorResponseToBaseResponse(it).message }?:"ERROR"
                     _message.value= Event(message)

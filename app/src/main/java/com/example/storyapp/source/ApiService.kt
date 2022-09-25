@@ -20,9 +20,9 @@ interface ApiService {
                  @Part
                   photo: MultipartBody.Part,
                  @Part("lat")
-                  lat: RequestBody,
+                  lat: RequestBody?,
                  @Part("lon")
-                  lon: RequestBody
+                  lon: RequestBody?
     ) : Call<BaseResponse>
 
     @GET("stories")
