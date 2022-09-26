@@ -35,5 +35,8 @@
     <string name="take_photo">Ambil Gambar</string>
     <string name="login">Masuk</string>
     <string name="detail">Detail</string>
+    <string name="gallery_photo">Foto Galeri</string>
+    <string name="from_gallery">Dari Galeri</string>
+    <string name="from_camera">Dari Camera</string>
 
 </resources>

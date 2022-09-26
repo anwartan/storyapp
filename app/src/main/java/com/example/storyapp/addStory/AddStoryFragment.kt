@@ -1,13 +1,20 @@
 package com.example.storyapp.addStory
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.content.Intent.ACTION_GET_CONTENT
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResultListener
@@ -17,6 +24,8 @@ import com.example.storyapp.R
 import com.example.storyapp.base.BaseFragment
 import com.example.storyapp.databinding.FragmentAddStoryBinding
 import com.example.storyapp.utils.rotateBitmap
+import com.example.storyapp.utils.uriToFile
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.io.File
 
 class AddStoryFragment : BaseFragment() {
@@ -35,6 +44,7 @@ class AddStoryFragment : BaseFragment() {
         return binding.root
     }
 
+    @SuppressLint("InflateParams")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setFragmentResultListener(CAMERA_RESULT) { _, bundle ->
@@ -56,7 +66,27 @@ class AddStoryFragment : BaseFragment() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
-        binding.previewImageView.setOnClickListener { startCameraX() }
+        binding.previewImageView.setOnClickListener {
+            val dialog = BottomSheetDialog(requireContext())
+            val viewBottomSheet = layoutInflater.inflate(R.layout.bottom_sheet_take_picture,null)
+
+            val camera = viewBottomSheet.findViewById<LinearLayout>(R.id.camera_photo)
+            val gallery = viewBottomSheet.findViewById<LinearLayout>(R.id.gallery_photo)
+            camera.setOnClickListener {
+                startCameraX()
+                dialog.dismiss()
+            }
+            gallery.setOnClickListener {
+                startGallery()
+                dialog.dismiss()
+            }
+
+            dialog.setCancelable(true)
+            dialog.setContentView(viewBottomSheet)
+            dialog.show()
+
+        }
+
 
         binding.btnAddStory.setOnClickListener {
             if(binding.etDescription.isValid()) {
@@ -74,7 +104,6 @@ class AddStoryFragment : BaseFragment() {
                         )
                     }
                 }
-
             }
         }
 
@@ -119,6 +148,26 @@ class AddStoryFragment : BaseFragment() {
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
+    }
+
+
+
+    private val launcherIntentGallery = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val selectedImg: Uri = result.data?.data as Uri
+            val myFile = uriToFile(selectedImg, requireContext())
+            imageFile=myFile
+            binding.previewImageView.setImageURI(selectedImg)
+        }
+    }
+    private fun startGallery() {
+        val intent = Intent()
+        intent.action = ACTION_GET_CONTENT
+        intent.type = "image/*"
+        val chooser = Intent.createChooser(intent, "Choose a Picture")
+        launcherIntentGallery.launch(chooser)
     }
     override fun onDestroyView() {
         super.onDestroyView()

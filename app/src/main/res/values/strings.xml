@@ -38,4 +38,7 @@
     <string name="take_photo">Take photo</string>
     <string name="login">Login</string>
     <string name="detail">Detail</string>
+    <string name="gallery_photo">Galery Photo</string>
+    <string name="from_gallery">From Gallery</string>
+    <string name="from_camera">From Camera</string>
 </resources>
