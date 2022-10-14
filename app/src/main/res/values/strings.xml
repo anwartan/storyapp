@@ -41,4 +41,10 @@
     <string name="gallery_photo">Galery Photo</string>
     <string name="from_gallery">From Gallery</string>
     <string name="from_camera">From Camera</string>
+    <string name="map">Map</string>
+    <string name="google_map">Google Map</string>
+    <string name="retry">Retry</string>
+    <string name="fab">fab</string>
+    <string name="lat_short">Lat : %1$s</string>
+    <string name="long_short">Long : %1$s</string>
 </resources>

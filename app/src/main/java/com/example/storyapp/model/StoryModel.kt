@@ -6,11 +6,11 @@ import java.util.*
 
 @Parcelize
 data class StoryModel(
-    val id :String,
+    val id:String,
     val name:String,
     val description:String,
     val photoUrl:String,
     val created:Date,
-    val lat: Float,
-    val lon: Float,
+    val lat: Double,
+    val lon: Double,
 ):Parcelable

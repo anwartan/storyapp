@@ -1,12 +1,8 @@
 package com.example.storyapp.main
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -18,9 +14,7 @@ import com.example.storyapp.R
 import com.example.storyapp.databinding.ActivityMainBinding
 import com.example.storyapp.helper.ViewModelFactory
 import com.example.storyapp.login.LoginActivity
-import com.example.storyapp.model.UserPreference
 
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -38,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupDrawerNavigationMenu(navController)
 
-        mainViewModel = ViewModelProvider(this,ViewModelFactory(UserPreference.getInstance(dataStore)))[MainViewModel::class.java]
+        mainViewModel = ViewModelProvider(this,ViewModelFactory(this))[MainViewModel::class.java]
 
         mainViewModel.getUser().observe(this){
             if(it.token.isEmpty()){

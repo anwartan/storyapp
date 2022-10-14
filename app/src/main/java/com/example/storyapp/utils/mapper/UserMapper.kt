@@ -1,11 +1,11 @@
 package com.example.storyapp.utils.mapper
 
 import com.example.storyapp.model.UserModel
-import com.example.storyapp.source.UserInfoResponse
+import com.example.storyapp.source.remote.UserInfoResponse
 
 object UserMapper {
 
-    fun mapResponseToDomain(input:UserInfoResponse):UserModel{
+    fun mapResponseToDomain(input: UserInfoResponse):UserModel{
         return UserModel(
             userId = input.userId,
             name = input.name,

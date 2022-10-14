@@ -1,26 +1,29 @@
 package com.example.storyapp.ui
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.storyapp.R
 import com.example.storyapp.databinding.ItemListStoryBinding
 import com.example.storyapp.model.StoryModel
+import com.example.storyapp.utils.CustomDiffUtilCallback
 
 class StoryAdapter : RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
     var onItemClick: ((StoryModel,ImageView,TextView,TextView) -> Unit)? = null
     private val listData =ArrayList<StoryModel>()
-    @SuppressLint("NotifyDataSetChanged")
+
     fun setListData(newListData:List<StoryModel>?){
         if (newListData == null) return
+        val customDiffUtilCallback = CustomDiffUtilCallback(this.listData,newListData)
+        val diffResult = DiffUtil.calculateDiff(customDiffUtilCallback)
         listData.clear()
         listData.addAll(newListData)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
     inner class ViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
         private val binding= ItemListStoryBinding.bind(itemView)

@@ -2,18 +2,20 @@ package com.example.storyapp
 
 import android.app.Application
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class MyApplication:Application() {
-    init {
+    override fun onCreate() {
+        super.onCreate()
         instance = this
     }
 
     companion object {
-        private var instance: MyApplication? = null
-
-        fun applicationContext() : Context {
-            return instance!!.applicationContext
-        }
+        lateinit var instance: MyApplication
+            private set
     }
 }

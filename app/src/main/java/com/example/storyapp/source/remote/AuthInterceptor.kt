@@ -1,4 +1,4 @@
-package com.example.storyapp.source
+package com.example.storyapp.source.remote
 
 import com.example.storyapp.model.UserPreference
 import kotlinx.coroutines.flow.first

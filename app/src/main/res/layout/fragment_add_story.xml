@@ -36,6 +36,28 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_baseline_image_24" />
 
+            <TextView
+                android:id="@id/tv_lat"
+                android:text="@string/lat_short"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toTopOf="@id/et_description"
+                app:layout_constraintEnd_toStartOf="@+id/tv_long"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/previewImageView" />
+
+            <TextView
+                android:text="@string/long_short"
+                android:id="@+id/tv_long"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toTopOf="@id/et_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_lat"
+                app:layout_constraintTop_toBottomOf="@id/previewImageView" />
             <com.example.storyapp.ui.CustomEditText
                 android:id="@+id/et_description"
                 android:layout_width="match_parent"

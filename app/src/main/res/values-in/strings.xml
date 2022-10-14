@@ -38,5 +38,10 @@
     <string name="gallery_photo">Foto Galeri</string>
     <string name="from_gallery">Dari Galeri</string>
     <string name="from_camera">Dari Camera</string>
-
+    <string name="google_map">Google Map</string>
+    <string name="map">Map</string>
+    <string name="retry">Retry</string>
+    <string name="fab">fab</string>
+    <string name="lat_short">Lat : %1$s</string>
+    <string name="long_short">Long : %1$s</string>
 </resources>

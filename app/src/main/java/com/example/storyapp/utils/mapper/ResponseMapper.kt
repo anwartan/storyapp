@@ -1,6 +1,6 @@
 package com.example.storyapp.utils.mapper
 
-import com.example.storyapp.source.BaseResponse
+import com.example.storyapp.source.remote.BaseResponse
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.ResponseBody

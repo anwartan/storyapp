@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.Intent.ACTION_GET_CONTENT
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,9 +23,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.storyapp.R
 import com.example.storyapp.base.BaseFragment
+import com.example.storyapp.data.Result
 import com.example.storyapp.databinding.FragmentAddStoryBinding
 import com.example.storyapp.utils.rotateBitmap
 import com.example.storyapp.utils.uriToFile
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.io.File
 
@@ -35,18 +39,39 @@ class AddStoryFragment : BaseFragment() {
     private val addStoryViewModel: AddStoryViewModel by viewModels()
     private var imageFile: File? = null
     private val binding get() = _binding!!
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var nowLocation:Location? = null
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            when {
+                permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
+                    // Precise location access granted.
+                    getMyLastLocation()
+                }
+                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
+                    // Only approximate location access granted.
+                    getMyLastLocation()
+                }
+                else -> {
+                    // No location access granted.
+                }
+            }
+        }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddStoryBinding.inflate(inflater, container, false)
-
+        
         return binding.root
     }
 
     @SuppressLint("InflateParams")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         setFragmentResultListener(CAMERA_RESULT) { _, bundle ->
             imageFile = bundle.get(CAMERA_RESULT) as File
             imageFile?.let { file ->
@@ -91,39 +116,71 @@ class AddStoryFragment : BaseFragment() {
         binding.btnAddStory.setOnClickListener {
             if(binding.etDescription.isValid()) {
                 val description = binding.etDescription.text.toString()
-                when (imageFile) {
-                    null -> {
-                        Toast.makeText(context, getString(R.string.ambil_foto), Toast.LENGTH_SHORT).show()
-                    }
-                    else -> {
-                        addStoryViewModel.addStory(
-                            description,
-                            null,
-                            null,
-                            imageFile!!
-                        )
+
+                if(imageFile==null){
+                    Toast.makeText(context, getString(R.string.ambil_foto), Toast.LENGTH_SHORT).show()
+                }
+
+                addStoryViewModel.addStory(
+                    description,
+                    nowLocation?.latitude?.toFloat(),
+                    nowLocation?.longitude?.toFloat(),
+                    imageFile!!
+                ).observe(viewLifecycleOwner){
+                    when(it){
+                        is Result.Success->{
+                            showLoading(false)
+                            findNavController().popBackStack()
+                        }
+                        is Result.Error->{
+                            showLoading(false)
+                            showToast(it.error)
+                        }
+                        is Result.Loading->{
+                            showLoading(true)
+                        }
                     }
                 }
             }
         }
 
-        addStoryViewModel.added.observe(viewLifecycleOwner) {
-            if (it) {
-                findNavController().popBackStack()
-            }
-        }
-        addStoryViewModel.message.observe(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let { message ->
-                showToast(message)
-            }
-        }
-        addStoryViewModel.isLoading.observe(viewLifecycleOwner){
-            showLoading(it)
-        }
 
+        getMyLastLocation()
 
     }
+    private fun checkPermission(permission: String): Boolean {
+        return ContextCompat.checkSelfPermission(
+            requireContext(),
+            permission
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+    private fun getMyLastLocation() {
+        if     (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) &&
+            checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+        ){
+            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                if (location != null) {
+                    binding.tvLat.text= getString(R.string.lat_short,location.latitude.toString())
+                    binding.tvLong.text=getString(R.string.lat_short,location.longitude.toString())
+                    nowLocation=location
 
+                } else {
+                    Toast.makeText(
+                        context,
+                        "Location is not found. Try Again",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        } else {
+            requestPermissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
+        }
+    }
 
     private fun startCameraX() {
         findNavController().navigate(R.id.action_addStoryFragment_to_cameraFragment)

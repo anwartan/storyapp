@@ -9,7 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.example.storyapp.R
 
-open class BaseFragment: Fragment() {
+abstract class BaseFragment: Fragment() {
     private var progressBar: ProgressBar? = null
     private var progressBarLayout : ConstraintLayout? = null
     private lateinit var safeContext: Context

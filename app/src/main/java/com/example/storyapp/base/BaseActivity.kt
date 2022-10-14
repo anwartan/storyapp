@@ -1,6 +1,5 @@
 package com.example.storyapp.base
 
-import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -8,8 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.storyapp.R
 
-@SuppressLint("Registered")
-open class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
     private var progressBar: ProgressBar? = null
     private var progressBarLayout :ConstraintLayout? = null
 
