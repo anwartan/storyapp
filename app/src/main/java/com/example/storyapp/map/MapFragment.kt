@@ -20,6 +20,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.storyapp.R
 import com.example.storyapp.data.Result
 import com.example.storyapp.databinding.FragmentMapBinding
@@ -135,6 +136,9 @@ class MapFragment : Fragment(),OnMapReadyCallback {
         ) { isGranted: Boolean ->
             if (isGranted) {
                 getMyLocation()
+            }else{
+                Toast.makeText(context,"Map Page need location permission",Toast.LENGTH_SHORT).show()
+                findNavController().popBackStack()
             }
         }
     private fun getMyLocation() {

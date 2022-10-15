@@ -3,14 +3,12 @@ package com.example.storyapp.map
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import com.example.storyapp.DataDummy
-import com.example.storyapp.data.AuthRepository
 import com.example.storyapp.data.Result
 import com.example.storyapp.data.StoryRepository
-import com.example.storyapp.login.LoginViewModel
 import com.example.storyapp.model.StoryModel
-import com.example.storyapp.model.UserModel
 import com.example.storyapp.utils.LiveDataTestUtil.getOrAwaitValue
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
@@ -35,12 +33,15 @@ class MapViewModelTest{
         mapViewModel = MapViewModel(storyRepository)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private val testDispatcher: TestDispatcher = UnconfinedTestDispatcher()
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Before
     fun setupDispatcher() {
         Dispatchers.setMain(testDispatcher)
     }
+    @OptIn(ExperimentalCoroutinesApi::class)
     @After
     fun tearDownDispatcher() {
         Dispatchers.resetMain()

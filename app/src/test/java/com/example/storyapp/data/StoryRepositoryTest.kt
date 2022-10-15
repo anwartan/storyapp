@@ -44,7 +44,7 @@ class StoryRepositoryTest{
         val actualStory = apiService.getStories(5,1,"1")
         Assert.assertNotNull(actualStory)
         Assert.assertEquals(expectedStory.error, actualStory.error)
-        Assert.assertEquals(expectedStory.listStory, actualStory.listStory)
+        Assert.assertEquals(expectedStory.listStory.size, actualStory.listStory.size)
     }
     @Test
     fun `when Add Stories Should Return Base Response`()  = runTest {

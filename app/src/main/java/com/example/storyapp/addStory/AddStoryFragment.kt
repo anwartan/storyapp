@@ -47,15 +47,14 @@ class AddStoryFragment : BaseFragment() {
         ) { permissions ->
             when {
                 permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
-                    // Precise location access granted.
                     getMyLastLocation()
                 }
                 permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
-                    // Only approximate location access granted.
                     getMyLastLocation()
                 }
                 else -> {
-                    // No location access granted.
+                    Toast.makeText(context,"Add Story Page need location permission",Toast.LENGTH_SHORT).show()
+                    findNavController().popBackStack()
                 }
             }
         }

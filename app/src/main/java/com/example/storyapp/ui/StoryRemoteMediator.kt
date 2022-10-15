@@ -23,7 +23,7 @@ class StoryRemoteMediator(private val apiService: ApiService,private val databas
         state: PagingState<Int, StoryModel>
     ): MediatorResult {
         val page = INITIAL_PAGE_INDEX
-        try {
+        return try {
             val responseData = apiService.findStories(page, state.config.pageSize,"1")
             val endOfPaginationReached = responseData.listStory.isEmpty()
             val listStoryEntity =StoryMapper.mapResponsesToEntities(responseData.listStory)
@@ -33,9 +33,9 @@ class StoryRemoteMediator(private val apiService: ApiService,private val databas
                 }
                 database.storyDao().insertStory(listStoryEntity)
             }
-            return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
+            MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: Exception) {
-            return MediatorResult.Error(exception)
+            MediatorResult.Error(exception)
         }
     }
     private companion object {

@@ -6,10 +6,13 @@ import com.example.storyapp.model.UserModel
 import com.example.storyapp.model.UserPreference
 import com.example.storyapp.utils.LiveDataTestUtil.getOrAwaitValue
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.*
+import kotlinx.coroutines.test.TestDispatcher
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
 import org.junit.*
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -30,12 +33,15 @@ class MainViewModelTest{
     fun setUp(){
         mainViewModel = MainViewModel(userPreference)
     }
+    @OptIn(ExperimentalCoroutinesApi::class)
     private val testDispatcher: TestDispatcher = UnconfinedTestDispatcher()
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Before
     fun setupDispatcher() {
         Dispatchers.setMain(testDispatcher)
     }
+    @OptIn(ExperimentalCoroutinesApi::class)
     @After
     fun tearDownDispatcher() {
         Dispatchers.resetMain()

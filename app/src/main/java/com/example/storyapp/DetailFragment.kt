@@ -2,11 +2,9 @@ package com.example.storyapp
 
 import android.os.Bundle
 import android.transition.TransitionInflater
-import android.view.*
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
-import androidx.lifecycle.Lifecycle
-import androidx.navigation.fragment.findNavController
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.example.storyapp.base.BaseFragment
 import com.example.storyapp.databinding.FragmentDetailBinding
 import com.example.storyapp.model.StoryModel

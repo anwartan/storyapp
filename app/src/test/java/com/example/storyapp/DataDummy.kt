@@ -26,17 +26,7 @@ object DataDummy {
     fun generateDummyFile(): File {
         return File("/assets/gambar2.PNG")
     }
-    fun generateDummyStoryModel():StoryModel{
-        return StoryModel(
-            id = "1",
-            name = "Story Name",
-            description = "Story Description",
-            photoUrl = "https://learnenglishteens.britishcouncil.org/sites/teens/files/b2w_a_short_story_english_exam_1.jpg",
-            created = Date(),
-            lat = 0.0,
-            lon = 0.0
-        )
-    }
+
     fun generateDummyStoryModels():List<StoryModel>{
         val storyModels = ArrayList<StoryModel>()
         for (i in 0..10) {
@@ -54,7 +44,7 @@ object DataDummy {
         return storyModels
     }
 
-    fun generateDummyStoryResponses():List<StoryResponse>{
+    private fun generateDummyStoryResponses():List<StoryResponse>{
         val storyModels = ArrayList<StoryResponse>()
         for (i in 0..10) {
             val story = StoryResponse(
@@ -72,6 +62,6 @@ object DataDummy {
     }
 
     fun generateDummyStoriesResponse():StoriesResponse{
-        return StoriesResponse(generateDummyStoryResponses());
+        return StoriesResponse(generateDummyStoryResponses())
     }
 }

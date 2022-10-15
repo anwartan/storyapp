@@ -8,7 +8,6 @@ import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.example.storyapp.model.StoryModel
 import com.example.storyapp.source.remote.ApiService
-import com.example.storyapp.source.remote.StoryResponse
 import com.example.storyapp.utils.mapper.StoryMapper
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull

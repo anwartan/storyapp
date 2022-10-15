@@ -11,10 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storyapp.R
 import com.example.storyapp.base.BaseFragment
-import com.example.storyapp.dataStore
 import com.example.storyapp.databinding.FragmentHomeBinding
 import com.example.storyapp.helper.ViewModelFactory
-import com.example.storyapp.model.UserPreference
 import com.example.storyapp.ui.LoadingStateAdapter
 import com.example.storyapp.ui.PagingStoryAdapter
 

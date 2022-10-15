@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object Injection {
 
-    fun provideApiService(context: Context): ApiService {
+    private fun provideApiService(context: Context): ApiService {
         val userPref = provideUserPreference(context)
         val loggingInterceptor = if(BuildConfig.DEBUG) {
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
