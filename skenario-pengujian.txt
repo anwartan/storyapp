@@ -1,0 +1,30 @@
+#Add Story View Model
+1. when Add Story Is Fetching Should Return Loading
+2. when Add Story Is Successfully Should Return Success
+3. when Add Story Is Failed Should Return Error
+
+#Login View Model 
+1. when Login Is Fetching Should Return Loading
+2. when Login Is Successfully Should Return Success
+3. when Login Is Failed Should Return Error
+4. when Get User Should Return User Model and Token is empty
+5. when Get User Should Return User Model and Token is not empty
+
+#Main View Model
+1. when Get User Is Successfully Should Return User Model with Empty Token
+2. when Get User Is Successfully Should Return User Model with Token
+
+#Map View Model
+1. when Get Story Is Fetching Should Return Loading
+2. when Get Story Is Successfully Should Return Success and List User Models
+3. when Get Story Is Failed Should Return Error
+
+#Register View Model
+1. when Register Is Fetching Should Return Loading
+2. when Register Is Successfully Should Return Success and Value True
+3. when Register Is Failed Should Return Error with Message
+
+#Story Repository
+1. when Get Stories Should Return Stories Response
+2. when Add Stories Should Return Base Response
+3. when Find Stories Should Return Stories Response

@@ -17,14 +17,18 @@
         <entry key="..\:/git/StoryApp/app/src/main/res/layout/bottom_sheet_take_picture.xml" value="0.2" />
         <entry key="..\:/git/StoryApp/app/src/main/res/layout/content_main.xml" value="0.12" />
         <entry key="..\:/git/StoryApp/app/src/main/res/layout/content_main2.xml" value="0.12" />
-        <entry key="..\:/git/StoryApp/app/src/main/res/layout/fragment_add_story.xml" value="0.1" />
+        <entry key="..\:/git/StoryApp/app/src/main/res/layout/fragment_add_story.xml" value="0.264" />
         <entry key="..\:/git/StoryApp/app/src/main/res/layout/fragment_camera.xml" value="0.2235539343408025" />
         <entry key="..\:/git/StoryApp/app/src/main/res/layout/fragment_detail.xml" value="0.1537037037037037" />
         <entry key="..\:/git/StoryApp/app/src/main/res/layout/fragment_first.xml" value="0.1" />
-        <entry key="..\:/git/StoryApp/app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="..\:/git/StoryApp/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/git/StoryApp/app/src/main/res/layout/fragment_login.xml" value="0.176" />
+        <entry key="..\:/git/StoryApp/app/src/main/res/layout/fragment_map.xml" value="0.20010422094841063" />
         <entry key="..\:/git/StoryApp/app/src/main/res/layout/item_list_story.xml" value="0.1" />
+        <entry key="..\:/git/StoryApp/app/src/main/res/layout/item_loading.xml" value="0.42650602409638555" />
         <entry key="..\:/git/StoryApp/app/src/main/res/layout/progress_bar_layout.xml" value="0.12239583333333333" />
+        <entry key="..\:/git/StoryApp/app/src/main/res/menu/main_drawer.xml" value="0.48349514563106794" />
+        <entry key="..\:/git/StoryApp/app/src/main/res/menu/menu_detail.xml" value="0.38345864661654133" />
         <entry key="..\:/git/StoryApp/app/src/main/res/menu/menu_main.xml" value="0.1" />
       </map>
     </option>
