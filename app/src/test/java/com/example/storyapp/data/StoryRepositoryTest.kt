@@ -3,14 +3,10 @@ package com.example.storyapp.data
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.storyapp.DataDummy
 import com.example.storyapp.source.remote.ApiService
+import com.example.storyapp.utils.LiveDataTestUtil.getOrAwaitValue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.*
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import org.junit.*
 
 @ExperimentalCoroutinesApi
@@ -39,34 +35,21 @@ class StoryRepositoryTest{
     }
 
     @Test
-    fun `when Get Stories Should Return Stories Response`()  = runTest {
-        val expectedStory = DataDummy.generateDummyStoriesResponse()
-        val actualStory = apiService.getStories(5,1,"1")
-        Assert.assertNotNull(actualStory)
-        Assert.assertEquals(expectedStory.error, actualStory.error)
-        Assert.assertEquals(expectedStory.listStory.size, actualStory.listStory.size)
-    }
-    @Test
     fun `when Add Stories Should Return Base Response`()  = runTest {
-        val expectedStory = DataDummy.generateDummyBaseResponse()
         val dummyFile = DataDummy.generateDummyFile()
-        val requestImageFile = dummyFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
-        val multiPart = MultipartBody.Part.createFormData("photo", dummyFile.name, requestImageFile)
-        val descriptionRequest = "description".toRequestBody("text/plain".toMediaType())
-        val latRequest = 0.0.toString().toRequestBody("text/plain".toMediaType())
-        val lonRequest = 0.0.toString().toRequestBody("text/plain".toMediaType())
-        val actualStory = apiService.addStory(descriptionRequest,multiPart,latRequest,lonRequest)
-        Assert.assertNotNull(actualStory)
-        Assert.assertEquals(expectedStory.error, actualStory.error)
-
+        val actual  = storyRepository.addStory("description",0.0F,0.0F,dummyFile)
+        Assert.assertNotNull(actual)
+        Assert.assertEquals(Result.Loading, actual.getOrAwaitValue())
+        Assert.assertEquals(true, ((actual.getOrAwaitValue()) as Result.Success).data)
     }
     @Test
     fun `when Find Stories Should Return Stories Response`()  = runTest {
         val expectedStory = DataDummy.generateDummyStoriesResponse()
-        val actualStory = apiService.findStories(1,1,"1")
+        val actualStory = storyRepository.getDataStories()
         Assert.assertNotNull(actualStory)
-        Assert.assertEquals(expectedStory.error, actualStory.error)
-        Assert.assertEquals(expectedStory.listStory.size, actualStory.listStory.size)
+        Assert.assertEquals(Result.Loading, actualStory.getOrAwaitValue())
+        Assert.assertEquals(expectedStory.listStory.size, ((actualStory.getOrAwaitValue()) as Result.Success).data.size)
+
     }
 
 }
