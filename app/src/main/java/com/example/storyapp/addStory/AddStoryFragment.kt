@@ -25,6 +25,7 @@ import com.example.storyapp.R
 import com.example.storyapp.base.BaseFragment
 import com.example.storyapp.data.Result
 import com.example.storyapp.databinding.FragmentAddStoryBinding
+import com.example.storyapp.helper.ViewModelFactory
 import com.example.storyapp.utils.rotateBitmap
 import com.example.storyapp.utils.uriToFile
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -36,7 +37,9 @@ class AddStoryFragment : BaseFragment() {
 
 
     private var _binding: FragmentAddStoryBinding? = null
-    private val addStoryViewModel: AddStoryViewModel by viewModels()
+    private val addStoryViewModel: AddStoryViewModel by viewModels{
+        ViewModelFactory(requireContext())
+    }
     private var imageFile: File? = null
     private val binding get() = _binding!!
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -118,6 +121,7 @@ class AddStoryFragment : BaseFragment() {
 
                 if(imageFile==null){
                     Toast.makeText(context, getString(R.string.ambil_foto), Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
                 }
 
                 addStoryViewModel.addStory(

@@ -61,9 +61,12 @@ class HomeFragment : BaseFragment(){
                 }
             )
         }
-        homeViewModel.stories.observe(viewLifecycleOwner){
+        homeViewModel.getStories()
 
-            storyAdapter.submitData(lifecycle,it)
+        homeViewModel.stories.observe(viewLifecycleOwner){
+            it?.let {
+                storyAdapter.submitData(lifecycle,it)
+            }
         }
 
         val menuHost : MenuHost = requireActivity()
@@ -84,6 +87,12 @@ class HomeFragment : BaseFragment(){
 
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        homeViewModel.getStories()
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
